@@ -1,0 +1,732 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Адаптивный Telegram-like</title>
+    <link rel="stylesheet" href="telegram-mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="app-wrapper">
+
+        <div class="app-screen active-screen" id="login-screen">
+            <header class="mobile-header">
+                <i class="fas fa-arrow-left header-icon" onclick="showScreen('start-screen')"></i>
+                <h1>Вход</h1>
+            </header>
+            <div class="screen-content form-content">
+                <div class="login-logo-container">
+                    <i class="fab fa-telegram-plane tg-logo-icon"></i>
+                </div>
+                <h2>Войдите в свой аккаунт</h2>
+                <input type="tel" placeholder="Код страны + Номер телефона" class="tg-input" required>
+                <p class="login-info">Мы вышлем вам код подтверждения в Telegram или по СМС.</p>
+                <button class="tg-button primary-button" onclick="showScreen('chats-screen')">Продолжить</button>
+            </div>
+        </div>
+
+
+        <div class="app-screen" id="chats-screen">
+            <header class="mobile-header">
+                <i class="fas fa-bars header-icon" onclick="showScreen('settings-screen')"></i>
+                <h1>Telegram</h1>
+                <i class="fas fa-search header-icon"></i>
+            </header>
+            
+            <div class="screen-content chat-list-content">
+                <ul class="tg-chat-list">
+                    <li class="tg-chat-item active" onclick="showScreen('chat-window')">
+                        <div class="tg-avatar tg-avatar-group">ГП</div>
+                        <div class="tg-chat-info">
+                            <span class="tg-user-name">Группа по проекту</span>
+                            <p class="tg-last-message">Антон: Макет готов. ✅</p>
+                        </div>
+                        <div class="tg-meta">
+                            <span class="tg-timestamp">12:45</span>
+                            <span class="tg-unread-count">3</span>
+                        </div>
+                    </li>
+                    <li class="tg-chat-item" onclick="showScreen('chat-window')">
+                        <div class="tg-avatar tg-avatar-user">АС</div>
+                        <div class="tg-chat-info">
+                            <span class="tg-user-name">Анна Смирнова</span>
+                            <p class="tg-last-message">Надо обсудить...</p>
+                        </div>
+                        <div class="tg-meta">
+                            <span class="tg-timestamp">Вчера</span>
+                        </div>
+                    </li>
+                    </ul>
+            </div>
+            
+            <div class="floating-button">
+                <i class="fas fa-pen"></i>
+            </div>
+        </div>
+
+
+        <div class="app-screen" id="chat-window">
+            <header class="mobile-header">
+                <i class="fas fa-arrow-left header-icon" onclick="showScreen('chats-screen')"></i>
+                <div class="header-details" onclick="showScreen('profile-screen')">
+                    <div class="tg-avatar-small tg-avatar-group">ГП</div>
+                    <div class="header-title">
+                        <h2>Группа по проекту</h2>
+                        <span class="chat-status">24 участника</span>
+                    </div>
+                </div>
+                <i class="fas fa-ellipsis-v header-icon"></i>
+            </header>
+
+            <div class="screen-content message-area" id="message-area">
+                <div class="tg-message tg-received">
+                    <div class="tg-message-bubble"><p>Привет всем!</p></div>
+                    <span class="tg-message-time">12:35</span>
+                </div>
+                <div class="tg-message tg-sent">
+                    <div class="tg-message-bubble"><p>Я готов к обсуждению. ✅</p></div>
+                    <span class="tg-message-time">12:36 <i class="fas fa-check-double tg-read-status"></i></span>
+                </div>
+            </div>
+
+            <div class="tg-input-area mobile-input-area">
+                <form id="tg-message-form">
+                    <i class="fas fa-paperclip tg-icon"></i>
+                    <input type="text" id="tg-message-input" placeholder="Сообщение" required>
+                    <i class="far fa-smile tg-icon"></i>
+                    <button type="submit" id="tg-send-button"><i class="fas fa-microphone"></i></button>
+                </form>
+            </div>
+        </div>
+
+        
+        <div class="app-screen" id="profile-screen">
+            <header class="mobile-header">
+                <i class="fas fa-arrow-left header-icon" onclick="showScreen('chat-window')"></i>
+                <h1>Профиль</h1>
+                <i class="fas fa-pen header-icon"></i>
+            </header>
+            <div class="screen-content profile-content">
+                <div class="profile-avatar-large">
+                    <div class="tg-avatar-extra-large tg-avatar-user">АС</div>
+                    <h3>Анна Смирнова</h3>
+                </div>
+                
+                <div class="profile-section">
+                    <p class="section-title">Аккаунт</p>
+                    <div class="profile-row">
+                        <span>+7 900 123-45-67</span>
+                        <span class="label">Телефон</span>
+                    </div>
+                    <div class="profile-row">
+                        <span>@annasmirnova</span>
+                        <span class="label">Имя пользователя</span>
+                    </div>
+                </div>
+
+                <div class="profile-section">
+                    <p class="section-title">Информация</p>
+                    <div class="profile-row">
+                        <span>Привет! Я использую Telegram.</span>
+                        <span class="label">О себе</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="app-screen" id="settings-screen">
+            <header class="mobile-header">
+                <i class="fas fa-arrow-left header-icon" onclick="showScreen('chats-screen')"></i>
+                <h1>Настройки</h1>
+            </header>
+            <div class="screen-content settings-content">
+                
+                <div class="profile-summary" onclick="showScreen('profile-screen')">
+                    <div class="tg-avatar-large tg-avatar-user">Я</div>
+                    <div>
+                        <h3>Мой Аккаунт</h3>
+                        <p>@my_username</p>
+                    </div>
+                </div>
+
+                <ul class="settings-list">
+                    <li class="setting-item">
+                        <i class="fas fa-bell setting-icon"></i>
+                        <span>Уведомления и звуки</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="setting-item">
+                        <i class="fas fa-lock setting-icon"></i>
+                        <span>Конфиденциальность</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="setting-item">
+                        <i class="fas fa-palette setting-icon"></i>
+                        <span>Настройки чатов</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </li>
+                    <li class="setting-item">
+                        <i class="fas fa-moon setting-icon"></i>
+                        <span>Ночной режим</span>
+                        <div class="toggle-switch"></div>
+                    </li>
+                    <li class="setting-item red-text">
+                        <i class="fas fa-sign-out-alt setting-icon"></i>
+                        <span>Выйти</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="mobile-script.js"></script>
+</body>
+</html>
+<style>/* ============================================== */
+/* ГЛОБАЛЬНЫЕ СТИЛИ И ПЕРЕМЕННЫЕ */
+/* ============================================== */
+:root {
+    --tg-blue: #54a5e5;
+    --tg-bg-light: #f5f5f5;
+    --tg-bg-white: #ffffff;
+    --tg-border-light: #e6e6e6;
+    --tg-text-main: #222;
+    --tg-text-secondary: #777;
+    --tg-sent-bg: #E3F2FD; 
+    --tg-red: #d9534f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    margin: 0;
+    background-color: var(--tg-bg-light);
+}
+
+/* ============================================== */
+/* ОСНОВА МОБИЛЬНОГО ПРИЛОЖЕНИЯ (Mobile-First) */
+/* ============================================== */
+.app-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    overflow: hidden; /* Скрываем экраны, которые не активны */
+}
+
+.app-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(100%); /* Скрываем все экраны справа */
+    transition: transform 0.3s ease-in-out;
+    background-color: var(--tg-bg-light);
+    display: flex;
+    flex-direction: column;
+}
+
+.app-screen.active-screen {
+    transform: translateX(0); /* Показываем активный экран */
+}
+
+.screen-content {
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+/* Шапка приложения */
+.mobile-header {
+    background-color: var(--tg-blue);
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-header h1 {
+    font-size: 1.2em;
+    font-weight: 500;
+    margin: 0;
+}
+
+.header-icon {
+    font-size: 1.3em;
+    cursor: pointer;
+}
+
+.header-details {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.header-details h2 {
+    font-size: 1em;
+    margin: 0;
+    font-weight: 500;
+}
+
+.chat-status {
+    font-size: 0.75em;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================== */
+/* ОБЩИЕ КОМПОНЕНТЫ (АВАТАРЫ, СПИСКИ) */
+/* ============================================== */
+.tg-avatar { /* Базовый стиль */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1em;
+    flex-shrink: 0;
+}
+.tg-avatar-user { background-color: #2aabf1; }
+.tg-avatar-group { background-color: #f17769; }
+.tg-avatar-small { width: 35px; height: 35px; font-size: 0.9em; margin-right: 10px; }
+
+/* Стили списка чатов (Chats Screen) */
+.tg-chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.tg-chat-item {
+    display: flex;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--tg-border-light);
+    background-color: var(--tg-bg-white);
+    align-items: center;
+}
+
+.tg-chat-info {
+    flex-grow: 1;
+    margin: 0 10px;
+    min-width: 0;
+}
+
+.tg-meta {
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.tg-unread-count {
+    background-color: var(--tg-blue);
+    color: white;
+    font-size: 0.75em;
+    padding: 2px 7px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* Плавающая кнопка (создать новый чат) */
+.floating-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    background-color: var(--tg-blue);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.3em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+/* Стили сообщений (Chat Window) */
+.message-area {
+    padding: 10px;
+    background-color: #E6DDD5;
+}
+
+.tg-message {
+    margin-bottom: 8px;
+}
+
+.tg-message-bubble {
+    padding: 8px 12px;
+    border-radius: 18px;
+    max-width: 80%; /* Больше места на телефоне */
+    box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.1);
+}
+
+.tg-received {
+    align-items: flex-start;
+}
+
+.tg-received .tg-message-bubble {
+    background-color: var(--tg-bg-white);
+    border-bottom-left-radius: 5px;
+}
+
+.tg-sent {
+    align-items: flex-end;
+}
+
+.tg-sent .tg-message-bubble {
+    background-color: var(--tg-sent-bg);
+    border-bottom-right-radius: 5px;
+}
+
+.tg-input-area {
+    padding: 8px 10px;
+    border-top: 1px solid var(--tg-border-light);
+    background-color: var(--tg-bg-white);
+}
+
+#tg-message-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#tg-message-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: none;
+    background-color: var(--tg-bg-light);
+    border-radius: 20px;
+    outline: none;
+}
+
+/* Стили кнопок */
+#tg-send-button {
+    width: 40px;
+    height: 40px;
+    background-color: var(--tg-blue);
+    border-radius: 50%;
+    color: white;
+    border: none;
+    font-size: 1.1em;
+}
+
+.tg-icon {
+    color: var(--tg-text-secondary);
+    font-size: 1.3em;
+}
+
+/* ============================================== */
+/* СТИЛИ ЭКРАНА ВХОДА И НАСТРОЕК */
+/* ============================================== */
+.form-content {
+    padding: 30px 20px;
+    text-align: center;
+}
+
+.login-logo-container {
+    margin: 40px auto;
+}
+
+.tg-logo-icon {
+    font-size: 5em;
+    color: var(--tg-blue);
+}
+
+.tg-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--tg-border-light);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+.tg-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.primary-button {
+    background-color: var(--tg-blue);
+    color: white;
+}
+
+/* Профиль и Настройки */
+.profile-summary {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: var(--tg-bg-white);
+    border-bottom: 1px solid var(--tg-border-light);
+    margin-bottom: 10px;
+}
+
+.profile-summary h3 {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.profile-summary p {
+    margin: 2px 0 0 0;
+    color: var(--tg-text-secondary);
+    font-size: 0.9em;
+}
+
+.tg-avatar-extra-large {
+    width: 80px;
+    height: 80px;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+.profile-avatar-large {
+    padding: 20px 0;
+    text-align: center;
+    background-color: var(--tg-bg-white);
+    border-bottom: 1px solid var(--tg-border-light);
+}
+
+.profile-section {
+    background-color: var(--tg-bg-white);
+    margin-top: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--tg-border-light);
+    border-bottom: 1px solid var(--tg-border-light);
+}
+
+.section-title {
+    color: var(--tg-blue);
+    font-weight: 600;
+    font-size: 0.9em;
+    padding: 5px 20px;
+}
+
+.profile-row {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--tg-bg-light);
+}
+
+.profile-row span:first-child {
+    font-weight: 500;
+}
+
+.profile-row .label {
+    font-size: 0.8em;
+    color: var(--tg-text-secondary);
+}
+
+
+.settings-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    background-color: var(--tg-bg-white);
+    border-top: 1px solid var(--tg-border-light);
+    border-bottom: 1px solid var(--tg-border-light);
+}
+
+.setting-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--tg-border-light);
+    cursor: pointer;
+}
+
+.setting-item:last-child {
+    border-bottom: none;
+}
+
+.setting-icon {
+    font-size: 1.1em;
+    color: var(--tg-text-secondary);
+    margin-right: 15px;
+    width: 20px;
+    text-align: center;
+}
+
+.setting-item span {
+    flex-grow: 1;
+}
+
+.red-text {
+    color: var(--tg-red);
+}
+
+.red-text .setting-icon {
+    color: var(--tg-red);
+}
+
+.fa-chevron-right {
+    color: var(--tg-text-secondary);
+    font-size: 0.8em;
+}
+
+
+/* ============================================== */
+/* МЕДИА-ЗАПРОС ДЛЯ ДЕСКТОПА (ШИРОКИЙ ЭКРАН) */
+/* ============================================== */
+@media (min-width: 800px) {
+    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .app-wrapper {
+        width: 1200px;
+        height: 80vh;
+        min-height: 600px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        display: flex; /* Делаем гибким для колонок */
+        overflow: hidden;
+    }
+
+    .app-screen {
+        /* Деактивируем абсолютное позиционирование и анимацию для десктопного макета */
+        position: static; 
+        transform: translateX(0) !important;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+    }
+
+    /* На десктопе всегда показываем чаты и окно чата */
+    #chats-screen {
+        display: flex; 
+        width: 350px;
+        flex-shrink: 0;
+        border-right: 1px solid var(--tg-border-light);
+    }
+
+    /* На десктопе скрываем экраны входа, настроек и профиля */
+    #login-screen, 
+    #settings-screen, 
+    #profile-screen {
+        display: none; 
+    }
+    
+    #chat-window {
+        display: flex;
+        flex-grow: 1;
+    }
+
+    .mobile-header {
+        display: none; /* Скрываем мобильную шапку */
+    }
+
+    .chat-list-content {
+        flex-grow: 1;
+        overflow-y: auto;
+    }
+    
+    .tg-chat-list-area {
+        display: flex;
+        flex-direction: column;
+        width: 350px;
+    }
+    
+    .floating-button {
+        display: none; /* Скрываем плавающую кнопку на десктопе */
+    }
+
+    /* Десктопная шапка для списка чатов */
+    .tg-chat-list-area .mobile-header {
+        display: flex;
+        background-color: var(--tg-bg-white);
+        color: var(--tg-text-main);
+        border-bottom: 1px solid var(--tg-border-light);
+    }
+}
+</style><script>// Функция для переключения экранов
+function showScreen(screenId) {
+    const screens = document.querySelectorAll('.app-screen');
+    
+    screens.forEach(screen => {
+        // Деактивируем все экраны
+        screen.classList.remove('active-screen');
+    });
+
+    // Активируем нужный экран
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active-screen');
+    }
+
+    // Если мы на экране чатов, убедимся, что на десктопе показывается и окно чата
+    if (screenId === 'chats-screen' && window.innerWidth >= 800) {
+        const chatWindow = document.getElementById('chat-window');
+        if (chatWindow) {
+            chatWindow.classList.add('active-screen');
+        }
+    }
+}
+
+// Запускаем симуляцию отправки сообщения (как в предыдущем примере)
+document.addEventListener('DOMContentLoaded', () => {
+    const messageForm = document.getElementById('tg-message-form');
+    const messageInput = document.getElementById('tg-message-input');
+    const messageArea = document.getElementById('message-area');
+
+    if (messageForm) {
+        messageForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            const messageText = messageInput.value.trim();
+
+            if (messageText) {
+                const newMessage = document.createElement('div');
+                newMessage.classList.add('tg-message', 'tg-sent'); 
+                
+                const now = new Date();
+                const timeString = now.getHours().toString().padStart(2, '0') + ':' + 
+                                   now.getMinutes().toString().padStart(2, '0');
+
+                newMessage.innerHTML = `
+                    <div class="tg-message-bubble">
+                        <p>${messageText}</p>
+                    </div>
+                    <span class="tg-message-time">${timeString} <i class="fas fa-check-double tg-read-status"></i></span>
+                `;
+
+                messageArea.appendChild(newMessage);
+                messageInput.value = '';
+                messageArea.scrollTop = messageArea.scrollHeight; // Прокрутка вниз
+            }
+        });
+    }
+
+    // Начинаем с экрана входа, если мы на мобильном
+    if (window.innerWidth < 800) {
+        showScreen('login-screen');
+    } else {
+        // Начинаем с макета двух колонок на десктопе
+        showScreen('chats-screen');
+        showScreen('chat-window');
+    }
+});
+</script>
